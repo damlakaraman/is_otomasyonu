@@ -1,0 +1,15 @@
+requests
+
+beautifulsoup4
+
+pandas
+
+openpyxl
+
+playwright
+
+selenium
+
+python-dotenv
+
+lxml

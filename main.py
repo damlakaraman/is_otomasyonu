@@ -1,0 +1,3 @@
+from scrapers.teknopark_istanbul_scraper import scrape_teknopark
+
+scrape_teknopark()

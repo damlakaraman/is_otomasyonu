@@ -1,22 +1,22 @@
 from playwright.sync_api import sync_playwright
 
+from config import COMPANY_LIST_URL, HEADLESS, PAGE_TIMEOUT_MS
+
 
 def scrape_teknopark():
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=HEADLESS)
 
-    with sync_playwright() as p:
+        try:
+            page = browser.new_page()
 
-        browser = p.chromium.launch(
-            headless=False
-        )
+            page.goto(
+                COMPANY_LIST_URL,
+                wait_until="domcontentloaded",
+                timeout=PAGE_TIMEOUT_MS,
+            )
 
-        page = browser.new_page()
+            return page.title()
 
-        page.goto(
-            "https://www.teknoparkistanbul.com.tr/firma-listesi"
-        )
-
-        page.wait_for_timeout(3000)
-
-        print(page.title())
-
-        browser.close()
+        finally:
+            browser.close()
